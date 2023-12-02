@@ -54,6 +54,12 @@ def callback():
 
     return 'OK'
 
+@handler.add(FollowEvent)
+def handle_follow(event):
+    user_id = event.source.user_id
+    first_question = questions['1']['question']
+    line_bot_api.push_message(user_id, TextSendMessage(text=first_question))
+
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     global current_question_index
@@ -71,3 +77,4 @@ def handle_message(event):
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
+    
