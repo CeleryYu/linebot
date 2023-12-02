@@ -27,6 +27,19 @@ questions = {
 # 目前處於第幾個問題
 current_question_index = 1
 
+# 排程設定
+scheduler = BackgroundScheduler()
+scheduler.add_job(
+    func=lambda: line_bot_api.push_message('user_id', TextSendMessage(text=questions['1']['question'])),
+    trigger="cron",
+    hour=8,  # 設定每天的發送時間
+    minute=0
+)
+scheduler.start()
+
+# Shut down the scheduler when exiting the app
+atexit.register(lambda: scheduler.shutdown())
+
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -46,8 +59,6 @@ def handle_message(event):
     global current_question_index
 
     user_response = event.message.text
-
-    # 儲存使用者回答
 
     # 發送下一個問題
     if current_question_index <= len(questions):
