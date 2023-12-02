@@ -13,7 +13,6 @@ line_bot_api = LineBotApi('ofZ8Zu8xLMIp7k/CqUN8amL45Sahn7t4w7ZhndSBk+e7HISzHG7V1
 handler = WebhookHandler('Y84c10630243d396fea192496c7268d16')
 
 line_bot_api.push_message('U29fccb6e017276d8f643b99962307fb5', TextSendMessage(text='你可以開始了'))
-
 # 問題列表
 questions = {
     '1': {'question': '請問您昨晚的睡眠如何？ 1.很好 2.一般 3.不好'},
@@ -57,8 +56,11 @@ def callback():
 @handler.add(FollowEvent)
 def handle_follow(event):
     user_id = event.source.user_id
+    app.logger.info(f"Received Follow Event from user: {user_id}")
+
     first_question = questions['1']['question']
     line_bot_api.push_message(user_id, TextSendMessage(text=first_question))
+    app.logger.info(f"Sent the first question to user: {user_id}")
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
