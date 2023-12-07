@@ -21,7 +21,7 @@ handler = WebhookHandler('Y84c10630243d396fea192496c7268d16')
 
 line_bot_api.push_message('U29fccb6e017276d8f643b99962307fb5', TextSendMessage(text='你可以開始了'))
 # 要發送的訊息
-message = TextSendMessage(text='這是一則廣播消息。')
+message = TextSendMessage(text='我是朱虹聿，這linebot被我劫持了。')
 
 # 發送廣播消息
 response = line_bot_api.broadcast(messages=message)
