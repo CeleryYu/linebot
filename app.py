@@ -20,7 +20,20 @@ line_bot_api = LineBotApi('ofZ8Zu8xLMIp7k/CqUN8amL45Sahn7t4w7ZhndSBk+e7HISzHG7V1
 handler = WebhookHandler('Y84c10630243d396fea192496c7268d16')
 
 line_bot_api.push_message('U29fccb6e017276d8f643b99962307fb5', TextSendMessage(text='你可以開始了'))
-broadcast("你可以開始了")
+#嘗試
+# 要發送的訊息
+message = TextSendMessage(text='這是一則廣播消息。')
+
+# 發送廣播消息
+response = line_bot_api.broadcast(messages=message)
+
+# 檢查是否成功
+if response.status_code == 200:
+    print("廣播消息發送成功！")
+else:
+    print(f"廣播消息發送失敗，錯誤碼：{response.status_code}")
+    print(response.json())
+#嘗試結束
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
 def callback():
