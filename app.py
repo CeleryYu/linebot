@@ -80,7 +80,6 @@ def send_scheduled_message():
 schedule.every().day.at("20:45").do(send_scheduled_message)
 #try2
 @handler.add(MessageEvent, message=TextMessage)
-@handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     user_response = event.message.text
 
