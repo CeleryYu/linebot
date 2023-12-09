@@ -82,7 +82,7 @@ schedule.every().day.at("20:45").do(send_scheduled_message)
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     user_response = event.message.text
-
+line_bot_api.reply_message(event.reply_token, TextSendMessage(text='你好2！'))
     if user_response == '你好':
         # 回覆使用者的文字訊息
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text='你好！'))
