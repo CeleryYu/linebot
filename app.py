@@ -40,35 +40,35 @@ messages = [TextSendMessage(text='早安，又是新的一天，麻煩您回答�
 # 發送廣播消息
 response = line_bot_api.broadcast(messages=messages)
 
+
 #嘗試結束
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
+def handle_message(event):
+    user_response = event.message.text
+
+    if user_response == '你好':
+        reply_message = '你好！'
+    elif user_response == '再見':
+        reply_message = '再見！'
+    else:
+        reply_message = user_response  # 回覆其他訊息
+
+    # 回覆使用者
+    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_message))
+
+# Webhook endpoint
+@app.route("/callback", methods=['POST'])
 def callback():
-    # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
-
-    # get request body as text
     body = request.get_data(as_text=True)
-    app.logger.info("Request body: " + body)
 
-    # handle webhook body
     try:
         handler.handle(body, signature)
     except InvalidSignatureError:
         abort(400)
 
     return 'OK'
-
-#try2
-@handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
-    user_response = event.message.text
-    if user_response == '你好':
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text='你好！'))
-    elif user_response == '再見':
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text='再見！'))
-    else:
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=user_response))
 
 
 
