@@ -22,10 +22,10 @@ handler = WebhookHandler('Y84c10630243d396fea192496c7268d16')
 line_bot_api.push_message('U29fccb6e017276d8f643b99962307fb5', TextSendMessage(text='你可以開始了'))
 # 要發送的訊息
 
-#messages = [TextSendMessage(text='早安，又是新的一天，麻煩您回答下列問題喔。')]
+messages = [TextSendMessage(text='早安，又是新的一天，麻煩您回答下列問題喔。')]
 
 # 發送廣播消息
-#response = line_bot_api.broadcast(messages=messages)
+response = line_bot_api.broadcast(messages=messages)
 
 import re
 #嘗試結束
