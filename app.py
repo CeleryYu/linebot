@@ -21,20 +21,7 @@ handler = WebhookHandler('Y84c10630243d396fea192496c7268d16')
 
 line_bot_api.push_message('U29fccb6e017276d8f643b99962307fb5', TextSendMessage(text='你可以開始了'))
 # 要發送的訊息
-#message = TextSendMessage(text='我是朱虹聿，這linebot被我劫持了。')
 
-# 發送廣播消息
-#response = line_bot_api.broadcast(messages=message)
-
-# 檢查是否成功
-#if response.status_code == 200:
-    #print("廣播消息發送成功！")
-#else:
-   #print(f"廣播消息發送失敗，錯誤碼：{response.status_code}")
-    #print(response.json())
-#嘗試
-#try1
-# 要發送的訊息
 messages = [TextSendMessage(text='早安，又是新的一天，麻煩您回答下列問題喔。')]
 
 # 發送廣播消息
