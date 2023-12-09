@@ -63,6 +63,7 @@ def handle_message(event):
     else:
         # 回覆其他訊息
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=user_response))
+handle_message(event)
 
 #嘗試結束
 # 監聽所有來自 /callback 的 Post Request
