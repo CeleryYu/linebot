@@ -83,15 +83,15 @@ schedule.every().day.at("20:45").do(send_scheduled_message)
 def handle_message(event):
     user_response = event.message.text
 
-    # 根據使用者回覆做相對應的回應
     if user_response == '你好':
         reply_message = '你好！'
     elif user_response == '再見':
         reply_message = '再見！'
-        # 如果收到 '再見' 回覆，你可以結束對話或執行其他操作
+    else:
+        reply_message = user_response  # 回覆其他訊息
 
-    # 回覆使用者
     line_bot_api.reply_message(event.reply_token, TextSendMessage(text=reply_message))
+
 #嘗試結束
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
@@ -113,10 +113,7 @@ def callback():
 
 #訊息傳遞區塊
 ##### 基本上程式編輯都在這個function #####
-@handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
-    message = TextSendMessage(text=event.message.text)
-    line_bot_api.reply_message(event.reply_token,message)
+
 
 #主程式
 import os
