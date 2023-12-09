@@ -64,25 +64,12 @@ def callback():
 def handle_message(event):
     user_response = event.message.text
     if user_response == '你好':
-        # 回覆使用者的文字訊息
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text='你好！'))
-
-        # 執行推播操作，例如廣播訊息
-        messages = [TextSendMessage(text='這是一條推送訊息。')]
-        line_bot_api.broadcast(messages=messages)
-
     elif user_response == '再見':
-        # 回覆使用者的文字訊息
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text='再見！'))
-
-        # 執行推播操作，例如廣播訊息
-        messages = [TextSendMessage(text='這是一條推送訊息。')]
-        line_bot_api.broadcast(messages=messages)
-
     else:
-        # 回覆其他訊息
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=user_response))
-handle_message(event)
+
 
 
 
