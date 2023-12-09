@@ -27,7 +27,7 @@ line_bot_api.push_message('U29fccb6e017276d8f643b99962307fb5', TextSendMessage(t
 # 發送廣播消息
 #response = line_bot_api.broadcast(messages=messages)
 
-
+import re
 #嘗試結束
 # 監聽所有來自 /callback 的 Post Request
 
