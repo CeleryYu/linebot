@@ -1,6 +1,8 @@
 # 載入LineBot所需要的套件
 from flask import Flask, request, abort
 
+from linebot.models import TextSendMessage
+
 from linebot import (
     LineBotApi, WebhookHandler
 )
@@ -16,7 +18,10 @@ line_bot_api = LineBotApi('ofZ8Zu8xLMIp7k/CqUN8amL45Sahn7t4w7ZhndSBk+e7HISzHG7V1
 # 必須放上自己的Channel Secret
 handler = WebhookHandler('Y84c10630243d396fea192496c7268d16')
 
-line_bot_api.push_message('U29fccb6e017276d8f643b99962307fb5', TextSendMessage(text='你可以開始了'))
+line_bot_api.push_message('U29fccb6e017276d8f643b99962307fb5', [
+    TextSendMessage(text='你可以開始了'),
+    TextSendMessage(text='這是推播的內容')
+])
 
 # 要發送的訊息
 messages = [TextSendMessage(text='壓嗨')]
