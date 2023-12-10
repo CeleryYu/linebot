@@ -64,10 +64,7 @@ def callback():
     return 'OK'
 
 # 訊息傳遞區塊
-@handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
-    message = TextSendMessage(text=event.message.text)
-    line_bot_api.reply_message(event.reply_token, message)
+
 
 # 主程式
 if __name__ == "__main__":
