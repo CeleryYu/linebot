@@ -1,15 +1,13 @@
 # 載入LineBot所需要的套件
 from flask import Flask, request, abort
 
-from linebot.models import TextSendMessage
-
 from linebot import (
     LineBotApi, WebhookHandler
 )
 from linebot.exceptions import (
     InvalidSignatureError
 )
-from linebot.models import *
+from linebot.models import TextSendMessage
 
 app = Flask(__name__)
 
