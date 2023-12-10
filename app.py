@@ -22,17 +22,17 @@ handler = WebhookHandler('Y84c10630243d396fea192496c7268d16')
 
 line_bot_api.push_message('U29fccb6e017276d8f643b99962307fb5', TextSendMessage(text='你可以開始了'))
 # 要發送的訊息
-#message = TextSendMessage(text='我是朱虹聿，這linebot被我劫持了。')
+#message2 = TextSendMessage(text='我是朱虹聿，這linebot被我劫持了。')
 
 # 發送廣播消息
-#response = line_bot_api.broadcast(messages=message)
+#response = line_bot_api.broadcast(messages=message2)
 #嘗試
 #try1
 # 要發送的訊息
-messages = [TextSendMessage(text='壓嗨')]
+message = [TextSendMessage(text='壓嗨')]
 
 # 發送廣播消息
-response = line_bot_api.broadcast(messages=messages)
+response = line_bot_api.broadcast(messages=message)
 #try2
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
@@ -68,8 +68,8 @@ def callback():
 
 #訊息傳遞區塊
 ##### 基本上程式編輯都在這個function #####
-@handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
+@handler.add(MessageEvent, message1=TextMessage)
+def handle_message1(event):
     message = TextSendMessage(text=event.message.text)
     line_bot_api.reply_message(event.reply_token,message)
 
