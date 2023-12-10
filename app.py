@@ -29,9 +29,9 @@ def handle_message(event):
     user_response = event.message.text
 
     # 根據使用者回覆做相對應的回應
-    if user_response == '你好':
+    if user_response == '嗨':
         reply_message = '你好！'
-    elif user_response == '再見':
+    elif user_response == '掰':
         reply_message = '再見！'
         # 如果收到 '再見' 回覆，你可以結束對話或執行其他操作
 
