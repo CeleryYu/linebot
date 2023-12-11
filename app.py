@@ -54,7 +54,6 @@ keyword_responses = {
     'g': '其部位跟平時比起來的疼痛度為何？1.一直都這樣 2.突然開始痛'
     }
 
-}
 # 訊息傳遞區塊
 
 @handler.add(MessageEvent, message=TextMessage)
