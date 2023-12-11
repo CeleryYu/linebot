@@ -78,7 +78,7 @@ user_response = '2'  # 使用者回答的內容
 response_message = handle_user_response(user_response)
 
 # 將回應訊息發送給使用者
-#print(response_message.text)
+print(response_message.text)
 
 
 
