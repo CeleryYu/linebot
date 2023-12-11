@@ -55,30 +55,17 @@ def handle_user_response(user_response):
     # 根據問題編號取得當前問題
     current_question = questions.get(str(current_question_number))
 
-    if current_question:
-        if current_question_number == 1 and user_response == '1':
+        if user_response == '1':
             return TextSendMessage(text='謝謝您的回答')
-        elif current_question_number == 1 and user_response == '2':
+        elif user_response == '2':
             # 回傳第一個問題的回答，然後更新問題編號
             current_question_number += 1
             return TextSendMessage(text=current_question['question'])
-        elif current_question_number == 2:
-            # 回傳第二個問題的回答，不論使用者回答什麼，都繼續回傳第二個問題
-            current_question_number += 1
-            return TextSendMessage(text=current_question['question'])
-        else:
-            # 其他情況
-            current_question_number += 1
-            return TextSendMessage(text='謝謝您的回答')
-    else:
-        return TextSendMessage(text='謝謝您的回答！')
+        
 
-# 在使用者回答時呼叫處理函數
-user_response = '2'  # 使用者回答的內容
-response_message = handle_user_response(user_response)
 
 # 將回應訊息發送給使用者
-print(response_message.text)
+#print(response_message.text)
 
 
 
