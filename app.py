@@ -1,8 +1,8 @@
-#助教調過的程式碼
-#broadcast成功的程式碼
+# 助教調過的程式碼
+# broadcast成功的程式碼
 # -*- coding: utf-8 -*-
 
-#載入LineBot所需要的套件
+# 載入LineBot所需要的套件
 from flask import Flask, request, abort
 
 from linebot import (
@@ -22,26 +22,12 @@ line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
 CHANNEL_SECRET = 'ee0b2607b4cd2206e11c6f0dafa88144'
 handler = WebhookHandler(CHANNEL_SECRET)
 
-line_bot_api.push_message('U5f5c99cca72d8bb1d3111c3a00e03cea', TextSendMessage(text='您的身體狀況跟平時比起來如何呢？1.好 2.不好'))
-# 要發送的訊息
-#message = TextSendMessage(text='我是朱虹聿，這linebot被我劫持了。')
+# 初始化使用者回覆的dictionary
+user_responses = {}
 
-# 發送廣播消息
-#response = line_bot_api.broadcast(messages=message)
+# 初始化問題編號
+current_question_number = 1
 
-# 檢查是否成功
-#if response.status_code == 200:
-    #print("廣播消息發送成功！")
-#else:
-   #print(f"廣播消息發送失敗，錯誤碼：{response.status_code}")
-    #print(response.json())
-#嘗試
-#try1
-# 要發送的訊息
-#messages = [TextSendMessage(text='我是朱虹聿，這linebot被我劫持了。')]
-
-# 發送廣播消息
-#response = line_bot_api.broadcast(messages=messages)
 keyword_responses = {
     '1': '謝謝你的回覆！',
     '2': '您是哪個部位不舒服呢？a.頭 b.脖子 c.手 d.腳 e.背 f.腰 g.心臟',
@@ -52,12 +38,13 @@ keyword_responses = {
     'e': '其部位跟平時比起來的疼痛度為何？1.一直都這樣 2.突然開始痛',
     'f': '其部位跟平時比起來的疼痛度為何？1.一直都這樣 2.突然開始痛',
     'g': '其部位跟平時比起來的疼痛度為何？1.一直都這樣 2.突然開始痛'
-    }
+}
 
 # 訊息傳遞區塊
-
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    global current_question_number
+
     user_message = event.message.text
 
     # 檢查關鍵字
@@ -65,6 +52,13 @@ def handle_message(event):
         if keyword in user_message:
             # 如果訊息包含關鍵字，回覆相應內容
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=response))
+            
+            # 將使用者的回覆存入dictionary
+            user_responses[current_question_number] = {'question': keyword_responses[keyword], 'response': user_message}
+            
+            # 移至下一個問題
+            current_question_number += 1
+            
             return
 
 # 監聽所有來自 /callback 的 Post Request
@@ -85,11 +79,7 @@ def callback():
 
     return 'OK'
 
-#訊息傳遞區塊
-##### 基本上程式編輯都在這個function #####
-
-
-#主程式
+# 主程式
 import os
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
