@@ -36,10 +36,10 @@ line_bot_api.push_message('U5f5c99cca72d8bb1d3111c3a00e03cea', TextSendMessage(t
 #嘗試
 #try1
 # 要發送的訊息
-messages = [TextSendMessage(text='我是朱虹聿，這linebot被我劫持了。')]
+#messages = [TextSendMessage(text='我是朱虹聿，這linebot被我劫持了。')]
 
 # 發送廣播消息
-response = line_bot_api.broadcast(messages=messages)
+#response = line_bot_api.broadcast(messages=messages)
 
 #try2
 @handler.add(MessageEvent, message=TextMessage)
