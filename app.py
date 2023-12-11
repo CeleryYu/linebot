@@ -42,22 +42,26 @@ line_bot_api.push_message('U5f5c99cca72d8bb1d3111c3a00e03cea', TextSendMessage(t
 #response = line_bot_api.broadcast(messages=messages)
 
 #try2
+# 定義關鍵字和回覆內容
+keyword_responses = {
+    '你好': '你好！',
+    '早安': '早安！',
+    '晚安': '晚安！',
+    # 添加更多關鍵字和回覆
+}
+# 訊息傳遞區塊
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    user_response = event.message.text
+    user_message = event.message.text
 
-    # 根據使用者回覆做相對應的回應
-    if user_response == '你好':
-        reply_message = '你好！'
-    elif user_response == '再見':
-        reply_message = '再見！'
-        # 如果收到 '再見' 回覆，你可以結束對話或執行其他操作
-    else:
-        reply_message = TextSendMessage(text=event.message.text)
+    # 檢查關鍵字
+    for keyword, response in keyword_responses.items():
+        if keyword in user_message:
+            # 如果訊息包含關鍵字，回覆相應內容
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=response))
+            return
 
-    # 回覆使用者
-    line_bot_api.reply_message(event.reply_token, reply_message)
-
+    # 如果訊息中沒有任何關鍵字，可以回覆預設訊息或不回覆
 #嘗試結束
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
