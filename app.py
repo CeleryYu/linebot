@@ -41,38 +41,8 @@ line_bot_api.push_message('U5f5c99cca72d8bb1d3111c3a00e03cea', TextSendMessage(t
 # 發送廣播消息
 #response = line_bot_api.broadcast(messages=messages)
 
-questions = {
-    '1': {'question': '您是哪個部位不舒服呢？1.頭 2.脖子 3.手 4.腳 5.背 6.腰 7.心臟'},
-    '2': {'question': '其部位跟平時比起來的疼痛度為何？1.一直都這樣 2.突然開始痛'}
-}
-
-current_question_number = 1  # 初始問題編號
-
-# 處理使用者回答的函數
-def handle_user_response(user_response):
-    global current_question_number
-
-    # 根據問題編號取得當前問題
-    current_question = questions.get(str(current_question_number))
-
-        if user_response == '1':
-            return TextSendMessage(text='謝謝您的回答')
-        elif user_response == '2':
-            # 回傳第一個問題的回答，然後更新問題編號
-            current_question_number += 1
-            return TextSendMessage(text=current_question['question'])
-        
 
 
-# 將回應訊息發送給使用者
-#print(response_message.text)
-
-
-
-
-
-    # 如果訊息中沒有任何關鍵字，可以回覆預設訊息或不回覆
-#嘗試結束
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
 def callback():
