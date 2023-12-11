@@ -44,10 +44,19 @@ line_bot_api.push_message('U5f5c99cca72d8bb1d3111c3a00e03cea', TextSendMessage(t
 #response = line_bot_api.broadcast(messages=messages)
 keyword_responses = {
     '1': '謝謝你的回覆！',
-    '2': '您是哪個部位不舒服呢？1.頭 2.脖子 3.手 4.腳 5.背 6.腰 7.心臟'
-    # 添加更多關鍵字和回覆
+    '2': '您是哪個部位不舒服呢？a.頭 b.脖子 c.手 d.腳 e.背 f.腰 g.心臟',
+    'a': '其部位跟平時比起來的疼痛度為何？1.一直都這樣 2.突然開始痛',
+    'b': '其部位跟平時比起來的疼痛度為何？1.一直都這樣 2.突然開始痛',
+    'c': '其部位跟平時比起來的疼痛度為何？1.一直都這樣 2.突然開始痛',
+    'd': '其部位跟平時比起來的疼痛度為何？1.一直都這樣 2.突然開始痛',
+    'e': '其部位跟平時比起來的疼痛度為何？1.一直都這樣 2.突然開始痛',
+    'f': '其部位跟平時比起來的疼痛度為何？1.一直都這樣 2.突然開始痛',
+    'g': '其部位跟平時比起來的疼痛度為何？1.一直都這樣 2.突然開始痛'
+    }
+
 }
 # 訊息傳遞區塊
+
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     user_message = event.message.text
