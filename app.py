@@ -20,7 +20,7 @@ line_bot_api = LineBotApi('dHXecqvpOvx8In5RQHci6bbWTlu0FA3kICv0DqMe/Pj0rLQZuux23
 # 必須放上自己的Channel Secret
 handler = WebhookHandler('ee0b2607b4cd2206e11c6f0dafa88144')
 
-line_bot_api.push_message('U5f5c99cca72d8bb1d3111c3a00e03cea', TextSendMessage(text='你可以開始了'))
+line_bot_api.push_message('U5f5c99cca72d8bb1d3111c3a00e03cea', TextSendMessage(text='您的身體狀況跟平時比起來如何呢？1.好 2.不好'))
 # 要發送的訊息
 #message = TextSendMessage(text='我是朱虹聿，這linebot被我劫持了。')
 
@@ -40,8 +40,22 @@ line_bot_api.push_message('U5f5c99cca72d8bb1d3111c3a00e03cea', TextSendMessage(t
 
 # 發送廣播消息
 #response = line_bot_api.broadcast(messages=messages)
+keyword_responses = {
+    '1': '謝謝你的回覆！',
+    '2': '您是哪個部位不舒服呢？1.頭 2.脖子 3.手 4.腳 5.背 6.腰 7.心臟'
+    # 添加更多關鍵字和回覆
+}
+# 訊息傳遞區塊
+@handler.add(MessageEvent, message=TextMessage)
+def handle_message(event):
+    user_message = event.message.text
 
-
+    # 檢查關鍵字
+    for keyword, response in keyword_responses.items():
+        if keyword in user_message:
+            # 如果訊息包含關鍵字，回覆相應內容
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=response))
+            return
 
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
