@@ -5,6 +5,8 @@
 #載入LineBot所需要的套件
 from flask import Flask, request, abort
 
+import datetime
+
 from linebot import (
     LineBotApi, WebhookHandler
 )
@@ -21,8 +23,6 @@ line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
 # 必須放上自己的Channel Secret
 CHANNEL_SECRET = 'ee0b2607b4cd2206e11c6f0dafa88144'
 handler = WebhookHandler(CHANNEL_SECRET)
-
-user_responses = {}
 
 line_bot_api.push_message('U5f5c99cca72d8bb1d3111c3a00e03cea', TextSendMessage(text='您的身體狀況跟平時比起來如何呢？1.好 2.不好'))
 # 要發送的訊息
@@ -73,9 +73,48 @@ def handle_message(event):
             # 如果訊息包含關鍵字，回覆相應內容
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=response))
             
-            user_responses = {'question': keyword_responses[keyword], 'response': user_message}
+# 儲存用戶回答的 dictionary
+user_responses = {}
+
+# 要求內容修改處
+@handler.add(MessageEvent, message=TextMessage)
+def handle_message(event):
+    user_id = event.source.user_id
+    user_message = event.message.text
+
+    # 檢查關鍵字
+    for keyword, response in keyword_responses.items():
+        if keyword in user_message:
+            # 如果訊息包含關鍵字，回覆相應內容
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=response))
+
+#紀錄次是
+# 儲存用戶回答的 dictionary
+user_responses = {}
+
+# 要求內容修改處
+@handler.add(MessageEvent, message=TextMessage)
+def handle_message(event):
+    user_id = event.source.user_id
+    user_message = event.message.text
+
+    # 檢查關鍵字
+    for keyword, response in keyword_responses.items():
+        if keyword in user_message:
+            # 如果訊息包含關鍵字，回覆相應內容
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=response))
+
+            # 記錄用戶回答的問題和內容，以及用戶ID和日期
+            current_date = datetime.date.today().strftime('%Y-%m-%d')
+            user_responses[user_id] = {
+                'question': keyword_responses[keyword],
+                'response': user_message,
+                'date': current_date
+            }
+            
             return
 
+#紀錄次是結束
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
 def callback():
