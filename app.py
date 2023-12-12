@@ -61,18 +61,6 @@ keyword_responses = {
     'j':'謝謝你的回覆！祝你有美好的一天'
      }
 
-# 訊息傳遞區塊
-
-@handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
-    user_message = event.message.text
-
-    # 檢查關鍵字
-    for keyword, response in keyword_responses.items():
-        if keyword in user_message:
-            # 如果訊息包含關鍵字，回覆相應內容
-            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=response))
-
 #紀錄次是
 # 儲存用戶回答的 dictionary
 user_responses = {}
