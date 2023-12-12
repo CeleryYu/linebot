@@ -24,21 +24,8 @@ line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
 CHANNEL_SECRET = 'ee0b2607b4cd2206e11c6f0dafa88144'
 handler = WebhookHandler(CHANNEL_SECRET)
 
-line_bot_api.push_message('U5f5c99cca72d8bb1d3111c3a00e03cea', TextSendMessage(text='您的身體狀況跟平時比起來如何呢？1.好 2.不好'))
-# 要發送的訊息
-#message = TextSendMessage(text='我是朱虹聿，這linebot被我劫持了。')
+#line_bot_api.push_message('U5f5c99cca72d8bb1d3111c3a00e03cea', TextSendMessage(text='您的身體狀況跟平時比起來如何呢？1.好 2.不好'))
 
-# 發送廣播消息
-#response = line_bot_api.broadcast(messages=message)
-
-# 檢查是否成功
-#if response.status_code == 200:
-    #print("廣播消息發送成功！")
-#else:
-   #print(f"廣播消息發送失敗，錯誤碼：{response.status_code}")
-    #print(response.json())
-#嘗試
-#try1
 # 要發送的訊息
 #messages = [TextSendMessage(text='我是朱虹聿，這linebot被我劫持了。')]
 
@@ -87,6 +74,27 @@ def handle_message(event):
             
             return
 
+message = TextSendMessage(text='您的身體狀況跟平時比起來如何呢？1.好 2.不好')
+
+# 定義推送任務
+def push_message():
+    line_bot_api.push_message('U5f5c99cca72d8bb1d3111c3a00e03cea', messages=message)
+
+# 每天的8:00 AM執行推送任務
+schedule.every().day.at("13:51").do(push_message)
+
+# 推送訊息的主程式
+def push_job():
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+
+# 推送訊息的主程式啟動
+
+
+
+
+
 #紀錄次是結束
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
@@ -113,5 +121,9 @@ def callback():
 #主程式
 import os
 if __name__ == "__main__":
+    # 使用多執行緒避免 blocking
+    import threading
+    thread = threading.Thread(target=push_job)
+    thread.start()
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
