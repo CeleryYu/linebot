@@ -98,6 +98,23 @@ def handle_message(event):
             }
             
             return
+            
+from linebot.models import TextSendMessage
+
+# 假設您的 user_responses 存放在一個名為 user_responses 的 dictionary 中
+
+# 取得所有使用者的 Line ID
+user_ids = list(user_responses.keys())
+
+# 要傳送的訊息
+message = "以下是所有使用者的回答資訊：\n"
+for user_id in user_ids:
+    response_data = user_responses[user_id]
+    message += f"User ID: {user_id}\n問題：{response_data['question']}\n回答：{response_data['response']}\n日期：{response_data['date']}\n\n"
+
+# 使用 broadcast 傳送訊息給所有好友
+line_bot_api.broadcast(TextSendMessage(text=message))
+
 
 #紀錄次是結束
 # 監聽所有來自 /callback 的 Post Request
