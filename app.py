@@ -45,7 +45,7 @@ line_bot_api.push_message('U5f5c99cca72d8bb1d3111c3a00e03cea', TextSendMessage(t
 # 發送廣播消息
 #response = line_bot_api.broadcast(messages=messages)
 keyword_responses = {
-    '1': '謝謝你的回覆！',
+    '1': '謝謝你的回覆！祝你有美好的一天',
     '2': '您是哪個部位不舒服呢？a.頭 b.脖子 c.手 d.腳 e.背 f.腰 g.心臟',
     'a': '其部位跟平時比起來的疼痛度為何？甲.一直都這樣 乙.突然開始痛',
     'b': '其部位跟平時比起來的疼痛度為何？甲.一直都這樣 乙.突然開始痛',
