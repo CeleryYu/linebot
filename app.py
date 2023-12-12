@@ -1,4 +1,4 @@
-#有成功
+#12120117成功code
 #broadcast成功的程式碼
 # -*- coding: utf-8 -*-
 
@@ -98,9 +98,6 @@ def handle_message(event):
             }
             
             return
-            
-
-
 
 #紀錄次是結束
 # 監聽所有來自 /callback 的 Post Request
