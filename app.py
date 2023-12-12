@@ -2,6 +2,8 @@
 from flask import Flask, request, abort
 
 import datetime
+import schedule
+import time
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -11,7 +13,7 @@ from linebot.exceptions import (
 )
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 
-import schedule
+
 app = Flask(__name__)
 
 CHANNEL_ACCESS_TOKEN = 'dHXecqvpOvx8In5RQHci6bbWTlu0FA3kICv0DqMe/Pj0rLQZuux23kX/royu7Pw/IZ0qPTVmW1myNJT9fo2fjOivhaUCHcQeU0mTba+Yl6+FEfLDyoyLDbhGJW9uYi6d27G+uk2Qum/z2KRxgIlBygdB04t89/1O/w1cDnyilFU='
