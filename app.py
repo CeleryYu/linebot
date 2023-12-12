@@ -76,6 +76,10 @@ def handle_message(event):
 
 message = TextSendMessage(text='您的身體狀況跟平時比起來如何呢？1.好 2.不好')
 
+import os
+os.environ['TZ'] = 'Asia/Taipei'
+
+
 # 定義推送任務
 def push_message():
     line_bot_api.push_message('U5f5c99cca72d8bb1d3111c3a00e03cea', messages=message)
