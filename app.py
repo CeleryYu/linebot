@@ -1,8 +1,4 @@
-#12120117成功code
-#broadcast成功的程式碼
-# -*- coding: utf-8 -*-
 
-#載入LineBot所需要的套件
 from flask import Flask, request, abort
 
 import datetime
@@ -15,6 +11,7 @@ from linebot.exceptions import (
 )
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 
+import schedule
 app = Flask(__name__)
 
 CHANNEL_ACCESS_TOKEN = 'dHXecqvpOvx8In5RQHci6bbWTlu0FA3kICv0DqMe/Pj0rLQZuux23kX/royu7Pw/IZ0qPTVmW1myNJT9fo2fjOivhaUCHcQeU0mTba+Yl6+FEfLDyoyLDbhGJW9uYi6d27G+uk2Qum/z2KRxgIlBygdB04t89/1O/w1cDnyilFU='
@@ -85,7 +82,7 @@ def push_message():
     line_bot_api.push_message('U5f5c99cca72d8bb1d3111c3a00e03cea', messages=message)
 
 # 每天的8:00 AM執行推送任務
-schedule.every().day.at("13:58").do(push_message)
+schedule.every().day.at(14:08").do(push_message)
 
 # 推送訊息的主程式
 def push_job():
