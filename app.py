@@ -1,9 +1,9 @@
 
 from flask import Flask, request, abort
 
-import datetime
-import schedule
-import time
+#import datetime
+#import schedule
+#import time
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -23,7 +23,7 @@ line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
 CHANNEL_SECRET = 'ee0b2607b4cd2206e11c6f0dafa88144'
 handler = WebhookHandler(CHANNEL_SECRET)
 
-#line_bot_api.push_message('U5f5c99cca72d8bb1d3111c3a00e03cea', TextSendMessage(text='您的身體狀況跟平時比起來如何呢？1.好 2.不好'))
+line_bot_api.push_message('U5f5c99cca72d8bb1d3111c3a00e03cea', TextSendMessage(text='您的身體狀況跟平時比起來如何呢？1.好 2.不好'))
 
 # 要發送的訊息
 #messages = [TextSendMessage(text='我是朱虹聿，這linebot被我劫持了。')]
@@ -73,44 +73,36 @@ def handle_message(event):
             
             return
 
-message = TextSendMessage(text='您的身體狀況跟平時比起來如何呢？1.好 2.不好')
+#message = TextSendMessage(text='您的身體狀況跟平時比起來如何呢？1.好 2.不好')
 
-import os
-os.environ['TZ'] = 'Asia/Taipei'
+#import os
+#os.environ['TZ'] = 'Asia/Taipei'
 
 
 # 定義推送任務
-def push_message():
-    line_bot_api.push_message('U5f5c99cca72d8bb1d3111c3a00e03cea', messages=message)
+#def push_message():
+ #   line_bot_api.push_message('U5f5c99cca72d8bb1d3111c3a00e03cea', messages=message)
 
 # 每天的8:00 AM執行推送任務
-schedule.every().day.at('14:18').do(push_message)
+#schedule.every().day.at('14:18').do(push_message)
 
 
 # 推送訊息的主程式
-def push_job():
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
+#def push_job():
+ #   while True:
+  #      schedule.run_pending()
+   #     time.sleep(1)
 
 # 推送訊息的主程式啟動
 
 
 
 
-
-#紀錄次是結束
-# 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
 def callback():
-    # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
-
-    # get request body as text
     body = request.get_data(as_text=True)
     app.logger.info("Request body: " + body)
-
-    # handle webhook body
     try:
         handler.handle(body, signature)
     except InvalidSignatureError:
@@ -118,16 +110,14 @@ def callback():
 
     return 'OK'
 
-#訊息傳遞區塊
-##### 基本上程式編輯都在這個function #####
 
 
 #主程式
 import os
 if __name__ == "__main__":
     # 使用多執行緒避免 blocking
-    import threading
-    thread = threading.Thread(target=push_job)
-    thread.start()
+  #  import threading
+  #  thread = threading.Thread(target=push_job)
+   # thread.start()
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
