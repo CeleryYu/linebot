@@ -76,7 +76,8 @@ def handle_message(event):
                 'response': user_message,
                 'date': current_date
             }
-            
+
+            '''
             # 以下是新加的Part
 
             # 將用戶回答的資料存入csv檔，以 user_id 命名
@@ -90,7 +91,7 @@ def handle_message(event):
                 user_responses_df.to_csv(os.path.join(directory, user_csv_file), index=False)
             
             # 新加的Part到此為止
-            
+            '''
             return
 
 #message = TextSendMessage(text='您的身體狀況跟平時比起來如何呢？1.好 2.不好')
