@@ -53,7 +53,7 @@ user_responses = {}
 
 
 # 儲存用戶資料的路徑
-directory = os.environ.get('FILE_STORAGE_PATH', 'C:/path/to/default/directory'/)
+directory = '/app/tmp'
 
 # 儲存用戶資料用的模組
 import pandas as pd
