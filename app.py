@@ -12,8 +12,6 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
-import pandas as pd
-import os
 
 app = Flask(__name__)
 
@@ -55,7 +53,9 @@ user_responses = {}
 # 儲存用戶資料的路徑
 directory = "C:/Users/N3D/OneDrive/桌面/Weiren/Python/temp"
 
-
+# 儲存用戶資料用的模組
+import pandas as pd
+import os
 
 # 要求內容修改處
 @handler.add(MessageEvent, message=TextMessage)
@@ -78,6 +78,7 @@ def handle_message(event):
             }
             
             # 以下是新加的Part
+
             # 將用戶回答的資料存入csv檔，以 user_id 命名
             user_csv_file = f"{user_id}.csv"
             user_responses_df = pd.DataFrame([user_responses[user_id]])
@@ -87,15 +88,17 @@ def handle_message(event):
                 combined_user_data.to_csv(os.path.join(directory, user_csv_file), index=False)
             except FileNotFoundError:
                 user_responses_df.to_csv(os.path.join(directory, user_csv_file), index=False)
+            
             # 新加的Part到此為止
             
             return
 
-#message = TextSendMessage(text='您的身體狀況跟平時比起來如何呢？1.好 2.不好')
+# message = TextSendMessage(text='您的身體狀況跟平時比起來如何呢？1.好 2.不好')
 
-#import os
+'''
+import os
 #os.environ['TZ'] = 'Asia/Taipei'
-
+'''
 
 # 定義推送任務
 '''
@@ -133,11 +136,12 @@ def callback():
 
 
 #主程式
-import os
 if __name__ == "__main__":
     # 使用多執行緒避免 blocking
-  #  import threading
-  #  thread = threading.Thread(target=push_job)
-   # thread.start()
+    '''
+    import threading
+    thread = threading.Thread(target=push_job)
+    thread.start()
+    '''
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
