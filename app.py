@@ -139,6 +139,7 @@ def callback():
 
 
 #主程式
+import os
 if __name__ == "__main__":
     # 使用多執行緒避免 blocking
     '''
