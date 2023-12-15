@@ -12,7 +12,8 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
-
+import pandas as pd
+import os
 
 app = Flask(__name__)
 
@@ -47,9 +48,14 @@ keyword_responses = {
     'j':'謝謝你的回覆！祝你有美好的一天'
      }
 
-#紀錄次是
+# 紀錄次數
 # 儲存用戶回答的 dictionary
 user_responses = {}
+
+# 儲存用戶資料的路徑
+directory = "C:/Users/N3D/OneDrive/桌面/Weiren/Python/temp"
+
+
 
 # 要求內容修改處
 @handler.add(MessageEvent, message=TextMessage)
@@ -71,6 +77,18 @@ def handle_message(event):
                 'date': current_date
             }
             
+            # 以下是新加的Part
+            # 將用戶回答的資料存入csv檔，以 user_id 命名
+            user_csv_file = f"{user_id}.csv"
+            user_responses_df = pd.DataFrame([user_responses[user_id]])
+            try:
+                existing_user_data = pd.read_csv(os.path.join(directory, user_csv_file))
+                combined_user_data = pd.concat([existing_user_data, user_responses_df], ignore_index=True)
+                combined_user_data.to_csv(os.path.join(directory, user_csv_file), index=False)
+            except FileNotFoundError:
+                user_responses_df.to_csv(os.path.join(directory, user_csv_file), index=False)
+            # 新加的Part到此為止
+            
             return
 
 #message = TextSendMessage(text='您的身體狀況跟平時比起來如何呢？1.好 2.不好')
@@ -80,19 +98,21 @@ def handle_message(event):
 
 
 # 定義推送任務
-#def push_message():
- #   line_bot_api.push_message('U5f5c99cca72d8bb1d3111c3a00e03cea', messages=message)
-
+'''
+def push_message():
+    line_bot_api.push_message('U5f5c99cca72d8bb1d3111c3a00e03cea', messages=message)
+'''
 # 每天的8:00 AM執行推送任務
-#schedule.every().day.at('14:18').do(push_message)
+# schedule.every().day.at('14:18').do(push_message)
 
 
 # 推送訊息的主程式
-#def push_job():
- #   while True:
-  #      schedule.run_pending()
-   #     time.sleep(1)
-
+'''
+def push_job():
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+'''
 # 推送訊息的主程式啟動
 
 
