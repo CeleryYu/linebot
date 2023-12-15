@@ -12,6 +12,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
+import os
 
 app = Flask(__name__)
 
@@ -50,14 +51,12 @@ keyword_responses = {
 # 儲存用戶回答的 dictionary
 user_responses = {}
 
-'''
+
 # 儲存用戶資料的路徑
 directory = "C:/Users/N3D/OneDrive/桌面/Weiren/Python/temp"
 
 # 儲存用戶資料用的模組
 import pandas as pd
-import os
-'''
 
 # 要求內容修改處
 @handler.add(MessageEvent, message=TextMessage)
@@ -79,7 +78,7 @@ def handle_message(event):
                 'date': current_date
             }
 
-            '''
+            
             # 以下是新加的Part
 
             # 將用戶回答的資料存入csv檔，以 user_id 命名
@@ -93,7 +92,7 @@ def handle_message(event):
                 user_responses_df.to_csv(os.path.join(directory, user_csv_file), index=False)
             
             # 新加的Part到此為止
-            '''
+            
             return
 
 #message = TextSendMessage(text='您的身體狀況跟平時比起來如何呢？1.好 2.不好')
@@ -139,7 +138,6 @@ def callback():
 
 
 #主程式
-import os
 if __name__ == "__main__":
     # 使用多執行緒避免 blocking
     '''
