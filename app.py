@@ -50,12 +50,14 @@ keyword_responses = {
 # 儲存用戶回答的 dictionary
 user_responses = {}
 
+'''
 # 儲存用戶資料的路徑
 directory = "C:/Users/N3D/OneDrive/桌面/Weiren/Python/temp"
 
 # 儲存用戶資料用的模組
 import pandas as pd
 import os
+'''
 
 # 要求內容修改處
 @handler.add(MessageEvent, message=TextMessage)
