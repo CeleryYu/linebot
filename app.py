@@ -93,7 +93,7 @@ def handle_message(event):
             
             return
 
-# message = TextSendMessage(text='您的身體狀況跟平時比起來如何呢？1.好 2.不好')
+#message = TextSendMessage(text='您的身體狀況跟平時比起來如何呢？1.好 2.不好')
 
 '''
 import os
@@ -106,7 +106,7 @@ def push_message():
     line_bot_api.push_message('U5f5c99cca72d8bb1d3111c3a00e03cea', messages=message)
 '''
 # 每天的8:00 AM執行推送任務
-# schedule.every().day.at('14:18').do(push_message)
+#schedule.every().day.at('14:18').do(push_message)
 
 
 # 推送訊息的主程式
