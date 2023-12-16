@@ -50,6 +50,11 @@ user_responses = {}
 
 # 儲存用戶資料用的模組
 import pandas as pd
+import pygsheets
+gc = pygsheets.authorize(service_file='linebot-408306-c24b0b63b2cf.json')
+sht = gc.open_by_url('https://docs.google.com/spreadsheets/d/1TLRVLW0s9wKxAnvw8yQjBM3r19hWrtVjsPOMeOW73Ts/')
+wks_list = sht.worksheets()
+wks = wks_list[0]
 
 # 要求內容修改處
 @handler.add(MessageEvent, message=TextMessage)
@@ -123,11 +128,9 @@ def callback():
         abort(400)
 
     return 'OK'
+    
 
-import pygsheets
-gc = pygsheets.authorize(service_file='linebot-408306-c24b0b63b2cf.json')
-sht = gc.open_by_url('https://docs.google.com/spreadsheets/d/1TLRVLW0s9wKxAnvw8yQjBM3r19hWrtVjsPOMeOW73Ts/')
-
+'''
 wks_list = sht.worksheets()
 print(wks_list)
 
@@ -135,6 +138,7 @@ wks = wks_list[0]
 #print(wks.cell('A1').value)
 wks.update_value('A1', 'try')
 #wks.update_cells('A2:A5',[['name1'],['name2'],['name3'],['name4']])
+'''
 
 #主程式
 if __name__ == "__main__":
