@@ -93,7 +93,7 @@ def handle_message(event):
             # 檢查是否有相同日期的資料
             if current_date in user_data_df['date'].values:
                 # 更新現有資料
-                user_data_df.loc[user_data_df['date'] == current_date, question] = user_message
+                user_data_df.loc[-1, question] = user_message
             else:
                 # 新增一行資料
                 user_responses_df = pd.DataFrame(user_responses)
@@ -140,17 +140,7 @@ def callback():
         abort(400)
 
     return 'OK'
-    
 
-'''
-wks_list = sht.worksheets()
-print(wks_list)
-
-wks = wks_list[0]
-#print(wks.cell('A1').value)
-wks.update_value('A1', 'try')
-#wks.update_cells('A2:A5',[['name1'],['name2'],['name3'],['name4']])
-'''
 
 #主程式
 import os
