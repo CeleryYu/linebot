@@ -7,7 +7,6 @@ import datetime
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
-import os
 
 app = Flask(__name__)
 
@@ -84,8 +83,8 @@ def handle_message(event):
             # 記錄用戶回答的問題和內容，以及用戶ID和日期
             current_date = datetime.date.today().strftime('%Y-%m-%d')
             user_responses = {
-                question: user_message,
-                'date': current_date
+                'date': current_date,
+                question: user_message
             }
             
             # 將用戶回答的資料存入Google試算表
@@ -148,6 +147,7 @@ wks.update_value('A1', 'try')
 '''
 
 #主程式
+import os
 if __name__ == "__main__":
     # 使用多執行緒避免 blocking
     '''
