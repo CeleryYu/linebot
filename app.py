@@ -136,7 +136,7 @@ def callback():
     return 'OK'
 
 import pygsheets
-gc = pygsheets.authorize(service_file='C:/Users/N3D/Downloads/linebot-408306-c24b0b63b2cf.json')
+gc = pygsheets.authorize(service_file='linebot-408306-c24b0b63b2cf.json')
 sht = gc.open_by_url('https://docs.google.com/spreadsheets/d/1TLRVLW0s9wKxAnvw8yQjBM3r19hWrtVjsPOMeOW73Ts/')
 
 wks_list = sht.worksheets()
