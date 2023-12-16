@@ -53,7 +53,7 @@ user_responses = {}
 
 
 # 儲存用戶資料的路徑
-directory = '/app/tmp'
+directory = 'https://script.google.com/macros/s/AKfycbxYx1Akeeb7_HUjLIiS5md63mT48Gf7fteiDFXwZz1Sh8Nujubb-IrdzvJZRTnfXdA/exec'
 
 # 儲存用戶資料用的模組
 import pandas as pd
