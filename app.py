@@ -42,7 +42,7 @@ keyword_responses = {
     'h':'謝謝你的回覆！祝你有美好的一天',
     'i':'謝謝你的回覆！祝你有美好的一天',
     'j':'謝謝你的回覆！祝你有美好的一天'
-     }
+    }
 
 # 紀錄次數
 # 儲存用戶回答的 dictionary
@@ -51,6 +51,7 @@ user_responses = {}
 # 儲存用戶資料用的模組
 import pandas as pd
 import pygsheets
+
 gc = pygsheets.authorize(service_file='linebot-408306-c24b0b63b2cf.json')
 sht = gc.open_by_url('https://docs.google.com/spreadsheets/d/1TLRVLW0s9wKxAnvw8yQjBM3r19hWrtVjsPOMeOW73Ts/')
 wks_list = sht.worksheets()
@@ -70,7 +71,7 @@ def handle_message(event):
 
             # 記錄用戶回答的問題和內容，以及用戶ID和日期
             current_date = datetime.date.today().strftime('%Y-%m-%d')
-            user_responses[user_id] = {
+            user_responses = {
                 'question': keyword_responses[keyword],
                 'response': user_message,
                 'date': current_date
