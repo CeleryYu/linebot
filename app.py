@@ -94,11 +94,13 @@ def handle_message(event):
             if current_date in user_data_df['date'].values:
                 # 更新現有資料
                 user_data_df.at[user_data_df.index.values[-1], question] = user_message
+                combined_user_data = user_data_df
             else:
                 # 新增一行資料
                 user_responses_df = pd.DataFrame(user_responses)
                 combined_user_data = pd.concat([user_data_df, user_responses_df], ignore_index=True)
-                wks.set_dataframe(combined_user_data, 'A1', copy_index=True, nan='')
+            
+            wks.set_dataframe(combined_user_data, 'A1', copy_index=True, nan='')
             return
 
 #message = TextSendMessage(text='您的身體狀況跟平時比起來如何呢？1.好 2.不好')
