@@ -93,7 +93,8 @@ def handle_message(event):
             # 檢查是否有相同日期的資料
             if current_date in user_data_df['date'].values:
                 # 更新現有資料
-                user_data_df.loc[-1, question] = user_message
+                i = user_data_df.tail().index[0]
+                user_data_df.loc[i, question] = user_message
             else:
                 # 新增一行資料
                 user_responses_df = pd.DataFrame(user_responses)
