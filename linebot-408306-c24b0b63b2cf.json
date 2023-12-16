@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "linebot-408306",
+  "private_key_id": "c24b0b63b2cfb2052a3e333ccd5d7cd95e97ba92",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCNEctRULogewcI\nW3vtx+5WMKIPEfGe0FoxVYPjTIjVTKdM0ykJxtbBvozp7VGC3+ABuTQsBnI64eq8\nqwunqp6+p9VDiw52PCHEPLdkqbs7rU3naQEFUWVxOzG/02LvcF/tSLYltlW1cwiM\nRuoMEypLZ6jxZFD6qjV+jkguRCTEeCGo0bC95eyUPfpK4pnO1T0M5sNAp+WvN+2R\nytWdAwnWXRF2Boh9eVC2/Nl4q1Kd9CD9UPl+/D8ENSlLeVd6RlkPruvsJixkKzrp\ngVYMK0WmHl+H1EMpjDqlvh7kKTO/QuUaQBDcO/sNntHRLUpBvCEzCoOGnOb3v/Mo\nV0WdY9CLAgMBAAECggEALVLKQBXvtv/QAp9h8cOKj6aQascZGi1WzQLsnNq6G83E\n8qnlRX7dAOJ347Cbv7CuB9+5I2vux3xOLs/Frtjip97EZi8HNnWbY7EeOvlNbp7/\nqJnT+iFstjSOh1MjNkqkh1gVLYingOS0ml0uVTLTI+bqIKRaYC7PgRm1lyfNqFF2\nR8kUnhNZTefFXXiC2RwuyAwojDdEAbf6pfKzdndnsl7SM5c/9paiHbNxqvcCtoBy\n24vBEOpn+4Kq8XhETe7dWBY0IqIv8VRGjnT/rVjLpMp0tI4yLsxn9QQ7tPPNFFWF\nMyJfEklypK4p8rPOnBObbDRu+AIZ3m++Tfb6BLDOAQKBgQDF/RV6KsAGFPHLnLzJ\nVCmEAZvdTkPUtrgAeoJOQagam/vS6hZdN5cGC1hD+WpLytD05fXbswJyMInLkykw\nNgT5Xe6LSBd+mkzDBevlRq+2npwLb235jBNCsjeQuExWCXFRiCTxPMQs/dZE2wx3\nsSr82qsJIsm2uP14af4lPkzGJQKBgQC2Z0TQ8ZecLAayHjjf08bcZZ2Q1f3vmNce\nhsfUqvrcC50ah4sqU52EZJKAHkXrCZEpaqGTuMXAsbEfnW3YmgEKy5SniVR7wHr3\n2xQZ+6c36OTW1KsRoJomnvOtYPmhskkYhfP/FHiF6gj01E63Izb74q9LKaXXJPcK\nuQga+jFE7wKBgGDve4931NJleMke8VOFMFpgS0a8JfvEhiw9zwSvorV8f3wRfmef\nawLblRiayg9Xupzc5lXtvBnaZ+zTHUxsdlz9P2jUICStOT4W7RsxU6CO4Ym7wdV3\nXoq+JPRnN4C8WM35YVT3UnlQwpKtyNnlVU29ZhYwASDES92jz3m+meo9AoGBALAz\nGdrtRhNqxB0T7MTrAtKspoTe8qqc7lFiyW66rBIcderGvLxqgWL+9DYnCEt/tmZX\nxzW36++0tvFfVllCi3cuKa+djartyNvdGZHv8xyjMUwFrCsfBUoBiksVvo9gdhPm\nckkaMULLTVOUM2Xd8qNn2wW0eatW3f3Rt+63eRipAoGBAMDHGylDC3sfD0M6gwBr\nFx2eqhcgx+hifHtOY/YNVGkHkH/GiX/nXcfsD5DfSgQXPP0FkGnIT2cjYlmiYYFM\nyHRt0jpk7lhFv1sJxFCzAHVr89s0oyTN5KCxUq1f7DZRD4Qg9PJIl5d8pPI/DVvY\nZL4a1Ll0+XQHOzMEBPXZ5PXN\n-----END PRIVATE KEY-----\n",
+  "client_email": "solisium@linebot-408306.iam.gserviceaccount.com",
+  "client_id": "109780251941767186931",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/solisium%40linebot-408306.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
