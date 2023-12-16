@@ -57,6 +57,17 @@ sht = gc.open_by_url('https://docs.google.com/spreadsheets/d/1TLRVLW0s9wKxAnvw8y
 wks_list = sht.worksheets()
 wks = wks_list[0]
 
+def judge_question(keyword):
+    if keyword in '12':
+        q = '身體狀況'
+    elif keyword in 'abcdefg':
+        q = '疼痛部位'
+    elif keyword in '甲乙':
+        q = '疼痛程度'
+    elif keyword in 'hij':
+        q = '食慾'
+    return q
+
 # 要求內容修改處
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
@@ -68,25 +79,20 @@ def handle_message(event):
         if keyword in user_message:
             # 如果訊息包含關鍵字，回覆相應內容
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=response))
-
+            question = judge_question(keyword)
+            
             # 記錄用戶回答的問題和內容，以及用戶ID和日期
             current_date = datetime.date.today().strftime('%Y-%m-%d')
             user_responses = {
-                'question': keyword_responses[keyword],
-                'response': user_message,
+                question: user_message,
                 'date': current_date
             }
             
-            # 以下是新加的Part
-
-            # 將用戶回答的資料存入csv檔，以 user_id 命名
-            
-            user_csv_df = wks.get_as_df(start='B1', empty_value='', include_tailing_empty=False) # index 從 1 開始算
+            # 將用戶回答的資料存入Google試算表
+            user_data_df = wks.get_as_df(start='B1', empty_value='', include_tailing_empty=False) # index 從 1 開始算
             user_responses_df = pd.DataFrame(user_responses, index = [0])
-            combined_user_data = pd.concat([user_csv_df, user_responses_df], ignore_index=False)
+            combined_user_data = pd.concat([user_data_df, user_responses_df], ignore_index=False)
             wks.set_dataframe(combined_user_data, 'A1', copy_index=True, nan='')
-            
-            # 新加的Part到此為止
             
             return
 
