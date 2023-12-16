@@ -83,15 +83,14 @@ def handle_message(event):
             # 記錄用戶回答的問題和內容，以及用戶ID和日期
             current_date = datetime.date.today().strftime('%Y-%m-%d')
             user_responses = {
-                'date': current_date,
-                question: user_message
+                question: user_message,
+                'date': current_date
             }
-            
             # 將用戶回答的資料存入Google試算表
-            user_data_df = wks.get_as_df(start='B1', empty_value='', include_tailing_empty=False) # index 從 1 開始算
-            user_responses_df = pd.DataFrame(user_responses, index = [0])
-            combined_user_data = pd.concat([user_data_df, user_responses_df], ignore_index=False)
-            wks.set_dataframe(combined_user_data, 'A1', copy_index=True, nan='')
+            user_data_df = wks.get_as_df(start='B1', empty_value='', include_tailing_empty=False)  # index 從 1 開始算
+            user_responses_df = pd.DataFrame(user_responses, index=[0])
+            combined_user_data = pd.concat([user_data_df, user_responses_df], ignore_index=True)
+            wks.set_dataframe(combined_user_data, 'A1', copy_index=False, nan='')
             
             return
 
