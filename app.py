@@ -1,25 +1,21 @@
-
 from flask import Flask, request, abort
 
-#import datetime
+import datetime
 #import schedule
 #import time
 
-from linebot import (
-    LineBotApi, WebhookHandler
-)
-from linebot.exceptions import (
-    InvalidSignatureError
-)
+from linebot import LineBotApi, WebhookHandler
+from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 import os
 
 app = Flask(__name__)
 
+# Channel Access Token
 CHANNEL_ACCESS_TOKEN = 'dHXecqvpOvx8In5RQHci6bbWTlu0FA3kICv0DqMe/Pj0rLQZuux23kX/royu7Pw/IZ0qPTVmW1myNJT9fo2fjOivhaUCHcQeU0mTba+Yl6+FEfLDyoyLDbhGJW9uYi6d27G+uk2Qum/z2KRxgIlBygdB04t89/1O/w1cDnyilFU='
-# 必須放上自己的Channel Access Token
 line_bot_api = LineBotApi(CHANNEL_ACCESS_TOKEN)
-# 必須放上自己的Channel Secret
+
+# Channel Secret
 CHANNEL_SECRET = 'ee0b2607b4cd2206e11c6f0dafa88144'
 handler = WebhookHandler(CHANNEL_SECRET)
 
@@ -30,6 +26,7 @@ line_bot_api.push_message('U5f5c99cca72d8bb1d3111c3a00e03cea', TextSendMessage(t
 
 # 發送廣播消息
 #response = line_bot_api.broadcast(messages=messages)
+
 keyword_responses = {
     '1': '謝謝你的回覆！祝你有美好的一天',
     '2': '您是哪個部位不舒服呢？a.頭 b.脖子 c.手 d.腳 e.背 f.腰 g.心臟',
@@ -50,10 +47,6 @@ keyword_responses = {
 # 紀錄次數
 # 儲存用戶回答的 dictionary
 user_responses = {}
-
-
-# 儲存用戶資料的路徑
-directory = 'https://script.google.com/macros/s/AKfycbxYx1Akeeb7_HUjLIiS5md63mT48Gf7fteiDFXwZz1Sh8Nujubb-IrdzvJZRTnfXdA/exec'
 
 # 儲存用戶資料用的模組
 import pandas as pd
@@ -77,19 +70,15 @@ def handle_message(event):
                 'response': user_message,
                 'date': current_date
             }
-
             
             # 以下是新加的Part
 
             # 將用戶回答的資料存入csv檔，以 user_id 命名
-            user_csv_file = f"{user_id}.csv"
-            user_responses_df = pd.DataFrame([user_responses[user_id]])
-            try:
-                existing_user_data = pd.read_csv(os.path.join(directory, user_csv_file))
-                combined_user_data = pd.concat([existing_user_data, user_responses_df], ignore_index=True)
-                combined_user_data.to_csv(os.path.join(directory, user_csv_file), index=False)
-            except FileNotFoundError:
-                user_responses_df.to_csv(os.path.join(directory, user_csv_file), index=False)
+            
+            user_csv_df = wks.get_as_df(start='B1', empty_value='', include_tailing_empty=False) # index 從 1 開始算
+            user_responses_df = pd.DataFrame(user_responses, index = [0])
+            combined_user_data = pd.concat([user_csv_df, user_responses_df], ignore_index=False)
+            wks.set_dataframe(combined_user_data, 'A1', copy_index=True, nan='')
             
             # 新加的Part到此為止
             
