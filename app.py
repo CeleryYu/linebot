@@ -111,8 +111,9 @@ def handle_message(event):
 
             # 將結合後的dataframe匯入用戶的工作表中
             wks.set_dataframe(combined_user_data, 'A1', copy_index=True, nan='')
-            
-            return
+
+    current_date = ''
+    return
 
 #message = TextSendMessage(text='您的身體狀況跟平時比起來如何呢？1.好 2.不好')
 
