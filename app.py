@@ -73,7 +73,7 @@ def handle_message(event):
     user_name = profile.display_name
     user_message = event.message.text
     
-    if user_id in [ws.title for ws in sht.worksheets()]:
+    if user_name in [ws.title for ws in sht.worksheets()]:
         wks = sht.worksheet_by_title(user_name)
     else:
         wks = sht.add_worksheet(user_name)
