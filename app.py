@@ -70,7 +70,7 @@ def judge_question(keyword):
 def handle_message(event):
     user_id = event.source.user_id
     profile = line_bot_api.get_profile(user_id)
-    user_name = profile.displayName
+    user_name = profile.display_name
     user_message = event.message.text
     
     if user_id in [ws.title for ws in sht.worksheets()]:
