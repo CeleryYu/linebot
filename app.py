@@ -77,6 +77,9 @@ def handle_message(event):
         wks = sht.worksheet_by_title(user_name)
     else:
         wks = sht.add_worksheet(user_name)
+        # 列名
+        columns = ['date', '身體狀況', '疼痛部位', '疼痛程度', '食慾']
+        wks.set_dataframe(pd.DataFrame(columns=columns), start='A2', copy_index=False, nan='')
     
     # 檢查關鍵字
     for keyword, response in keyword_responses.items():
@@ -96,6 +99,7 @@ def handle_message(event):
             user_data_df = wks.get_as_df(start='B1', empty_value='', include_tailing_empty=False)
             
             # 檢查是否有相同日期的資料
+            
             if current_date in user_data_df['date'].values:
                 # 更新現有資料
                 user_data_df.at[user_data_df.index.values[-1], question] = user_message
