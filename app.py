@@ -72,7 +72,8 @@ def handle_message(event):
     profile = line_bot_api.get_profile(user_id)
     user_name = profile.display_name
     user_message = event.message.text
-    
+
+    # 檢查回覆人是否為新用戶
     if user_name in [ws.title for ws in sht.worksheets()]:
         wks = sht.worksheet_by_title(user_name)
     else:
