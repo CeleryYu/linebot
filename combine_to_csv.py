@@ -47,7 +47,7 @@ try:
     # Clear the preceding schedules
     schedule.clear()
     #schedule.every(15).seconds.do(process_google_sheets_data)
-    schedule.every().day.at('6:30').do(process_google_sheets_data)
+    schedule.every().day.at('23:59').do(process_google_sheets_data)
 
     # Run the scheduler
     while True:
