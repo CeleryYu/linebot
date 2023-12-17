@@ -79,7 +79,7 @@ def handle_message(event):
         wks = sht.add_worksheet(user_name)
         # 列名
         columns = ['date', '身體狀況', '疼痛部位', '疼痛程度', '食慾']
-        wks.set_dataframe(pd.DataFrame(columns=columns), start='A2', copy_index=False, nan='')
+        wks.set_dataframe(pd.DataFrame(columns=columns), start='B1', copy_index=False, nan='')
     
     # 檢查關鍵字
     for keyword, response in keyword_responses.items():
