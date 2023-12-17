@@ -91,7 +91,7 @@ def handle_message(event):
             # 記錄用戶回答的問題和內容，以及用戶ID和日期
             current_date = datetime.date.today().strftime('%Y-%m-%d')
             user_responses = {
-                question: [user_message],
+                question: user_message,
                 'date': [current_date]
             }
 
