@@ -69,12 +69,14 @@ def judge_question(keyword):
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     user_id = event.source.user_id
+    profile = line_bot_api.get_profile(user_id)
+    user_name = profile.displayName
     user_message = event.message.text
     
     if user_id in [ws.title for ws in sht.worksheets()]:
-        wks = sht.worksheet_by_title(user_id)
+        wks = sht.worksheet_by_title(user_name)
     else:
-        wks = sht.add_worksheet(user_id)
+        wks = sht.add_worksheet(user_name)
     
     # 檢查關鍵字
     for keyword, response in keyword_responses.items():
