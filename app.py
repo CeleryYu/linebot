@@ -53,8 +53,6 @@ import pygsheets
 
 gc = pygsheets.authorize(service_file='linebot-408306-c24b0b63b2cf.json')
 sht = gc.open_by_url('https://docs.google.com/spreadsheets/d/1TLRVLW0s9wKxAnvw8yQjBM3r19hWrtVjsPOMeOW73Ts/')
-wks_list = sht.worksheets()
-wks = wks_list[0]
 
 def judge_question(keyword):
     if keyword in '12':
@@ -72,7 +70,12 @@ def judge_question(keyword):
 def handle_message(event):
     user_id = event.source.user_id
     user_message = event.message.text
-
+    
+    if user_id in [ws.title for ws in sht.worksheets()]:
+        wks = sht.worksheet_by_title(user_id)
+    else:
+        wks = sht.add_worksheet(user_id)
+    
     # 檢查關鍵字
     for keyword, response in keyword_responses.items():
         if keyword in user_message:
