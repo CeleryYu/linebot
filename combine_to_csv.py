@@ -36,9 +36,6 @@ def process_google_sheets_data():
     # Reset index to create a new set of continuous integers
     result_df.reset_index(drop=True, inplace=True)
     result_df = result_df.drop(columns=['date'])
-    
-    # Display the result DataFrame
-    print(result_df)
 
     # Save the result as a new CSV file without the original headers
     current_date = datetime.datetime.now(tz=datetime.timezone(datetime.timedelta(hours=8))).date()
