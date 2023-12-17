@@ -95,21 +95,22 @@ def handle_message(event):
                 'date': [current_date]
             }
 
-            # 將用戶回答的資料存入Google試算表
+            # 取得用戶以前的資料，並轉為dataframe
             user_data_df = wks.get_as_df(start='B1', empty_value='', include_tailing_empty=False)
             
             # 檢查是否有相同日期的資料
-            
             if current_date in user_data_df['date'].values:
                 # 更新現有資料
-                user_data_df.at[user_data_df.index.values[-1], question] = user_message
+                user_data_df.at[user_data_df.index.values[-1], question] = user_responses[question]
                 combined_user_data = user_data_df
             else:
                 # 新增一行資料
                 user_responses_df = pd.DataFrame(user_responses)
                 combined_user_data = pd.concat([user_data_df, user_responses_df], ignore_index=True)
-            
+
+            # 將結合後的dataframe匯入用戶的工作表中
             wks.set_dataframe(combined_user_data, 'A1', copy_index=True, nan='')
+            
             return
 
 #message = TextSendMessage(text='您的身體狀況跟平時比起來如何呢？1.好 2.不好')
