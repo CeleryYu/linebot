@@ -88,7 +88,7 @@ def handle_message(event):
             }
 
             # 將用戶回答的資料存入Google試算表
-            user_data_df = wks.get_as_df(start='B1', empty_value='', include_tailing_empty=False)  # index 從 1 開始算
+            user_data_df = wks.get_as_df(start='B1', empty_value='', include_tailing_empty=False)
             
             # 檢查是否有相同日期的資料
             if current_date in user_data_df['date'].values:
